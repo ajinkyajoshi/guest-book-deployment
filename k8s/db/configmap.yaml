@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init
+  namespace: guestbook-db
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS guestbook;
+    USE guestbook;
+    CREATE TABLE IF NOT EXISTS guest_entries (
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        message VARCHAR(500) NOT NULL,
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+    INSERT INTO guest_entries (name, message) VALUES
+    ('Admin', 'Welcome to the Guestbook! Feel free to leave a message.'),
+    ('Jane Doe', 'Great application, love the design!');
