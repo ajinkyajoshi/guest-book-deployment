@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestbook-api
+  namespace: guestbook-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: guestbook-api
+  template:
+    metadata:
+      labels:
+        app: guestbook-api
+    spec:
+      containers:
+      - name: guestbook-api
+        image: <account-id>.dkr.ecr.<region>.amazonaws.com/guestbook-api:latest
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - secretRef:
+            name: api-secret
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
+        livenessProbe:
+          httpGet:
+            path: /api/entries
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/entries
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 5
