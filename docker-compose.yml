@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  db:
+    build: ./guest-book-backend
+    container_name: guestbook-db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpass"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./guest-book-api
+    container_name: guestbook-api
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DB: guestbook
+      MYSQL_USER: guestuser
+      MYSQL_PASSWORD: guestpass
+    depends_on:
+      db:
+        condition: service_healthy
+
+  ui:
+    build: ./guest-book-ui
+    container_name: guestbook-ui
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+
+volumes:
+  mysql-data:
