@@ -116,6 +116,6 @@ kubectl delete -f k8s/ui/ -f k8s/api/ -f k8s/base/network-policies.yaml -f k8s/d
 
 Each microservice has its own detailed README:
 
-- [Guest Book API README](./guest-book-api/README.md) — API endpoints, data model, environment variables, sample responses
-- [Guest Book Backend README](./guest-book-backend/README.md) — Schema, seed data, backup/restore, persistence
-- [Guest Book UI README](./guest-book-ui/README.md) — Components, features, design system, nginx config
+- [Guest Book API README](https://github.com/ajinkyajoshi/guest-book-api/blob/main/README.md) — API endpoints, data model, environment variables, sample responses
+- [Guest Book Backend README](https://github.com/ajinkyajoshi/guest-book-backend/blob/main/README.md) — Schema, seed data, backup/restore, persistence
+- [Guest Book UI README](https://github.com/ajinkyajoshi/guest-book-ui/blob/main/README.md) — Components, features, design system, nginx config
