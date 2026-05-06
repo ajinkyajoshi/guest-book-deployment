@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: guestbook-ui
-        image: docker pull ghcr.io/ajinkyajoshi/guest-book-api/guest-book-ui:v1.0.0
+        image: ghcr.io/ajinkyajoshi/guest-book-api/guest-book-ui:v1.0.0
         ports:
         - containerPort: 80
         volumeMounts:
